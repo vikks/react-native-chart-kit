@@ -66,7 +66,7 @@ class ProgressChart extends AbstractChart {
             ry={borderRadius}
             fill="url(#backgroundGradient)"
           />
-          <G x={this.props.width / 2.5} y={this.props.height / 2}>
+          <G x={this.props.width / 2} y={this.props.height / 2}>
             <G>
               {pieBackgrounds.map(pie => {
                 return (
@@ -95,46 +95,52 @@ class ProgressChart extends AbstractChart {
                 );
               })}
             </G>
-            <G>
-              {pies.map((_, i) => {
-                return (
-                  <Rect
-                    key={Math.random()}
-                    width="16px"
-                    height="16px"
-                    fill={this.props.chartConfig.color(0.2 * (i + 1))}
-                    rx={8}
-                    ry={8}
-                    x={this.props.width / 2.5 - 24}
-                    y={
-                      -(this.props.height / 2.5) +
-                      ((this.props.height * 0.8) / data.data.length) * i +
-                      12
-                    }
-                  />
-                );
-              })}
-            </G>
-            <G>
-              {pies.map((_, i) => {
-                return (
-                  <Text
-                    key={Math.random()}
-                    x={this.props.width / 2.5}
-                    y={
-                      -(this.props.height / 2.5) +
-                      ((this.props.height * 0.8) / data.data.length) * i +
-                      12 * 2
-                    }
-                    {...this.getPropsForLabels()}
-                  >
-                    {withLabel(i)
-                      ? `${data.labels[i]} ${Math.round(100 * data.data[i])}%`
-                      : `${Math.round(100 * data.data[i])}%`}
-                  </Text>
-                );
-              })}
-            </G>
+            {this.props.chartConfig.showLabels ? (
+              <>
+                <G>
+                  {pies.map((_, i) => {
+                    return (
+                      <Rect
+                        key={Math.random()}
+                        width="16px"
+                        height="16px"
+                        fill={this.props.chartConfig.color(0.2 * (i + 1))}
+                        rx={8}
+                        ry={8}
+                        x={this.props.width / 2.5 - 24}
+                        y={
+                          -(this.props.height / 2.5) +
+                          ((this.props.height * 0.8) / data.data.length) * i +
+                          12
+                        }
+                      />
+                    );
+                  })}
+                </G>
+                <G>
+                  {pies.map((_, i) => {
+                    return (
+                      <Text
+                        key={Math.random()}
+                        x={this.props.width / 2.5}
+                        y={
+                          -(this.props.height / 2.5) +
+                          ((this.props.height * 0.8) / data.data.length) * i +
+                          12 * 2
+                        }
+                        {...this.getPropsForLabels()}
+                      >
+                        {withLabel(i)
+                          ? `${data.labels[i]} ${Math.round(
+                              100 * data.data[i]
+                            )}%`
+                          : `${Math.round(100 * data.data[i])}%`}
+                      </Text>
+                    );
+                  })}
+                </G>
+              </>
+            ) : null}
           </G>
         </Svg>
       </View>
@@ -142,4 +148,4 @@ class ProgressChart extends AbstractChart {
   }
 }
 
-export default ProgressChart;
+e;
